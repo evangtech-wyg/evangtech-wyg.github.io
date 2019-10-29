@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Language" content="en">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>wyg@evangtech</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://surveyjs.azureedge.net/1.1.17/survey.jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div id="surveyContainer"></div>
+  </div>
+</body>
+
+<script>
+  //Survey.Survey.cssType = "bootstrap";
+  Survey.StylesManager.applyTheme("bootstrap");
+
+  var surveyJSON = { pages: [{ name: "01", elements: [{ type: "text", name: "question1" }, { type: "checkbox", name: "question2", choices: ["item1", "item2", "item3"] }, { type: "radiogroup", name: "question3", choices: ["item1", "item2", "item3"] }, { type: "comment", name: "question4" }, { type: "rating", name: "question5" }], title: "Page01", description: "Page01 Description" }, { name: "02", elements: [{ type: "imagepicker", name: "question6", choices: [{ value: "lion", imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg" }, { value: "giraffe", imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg" }, { value: "panda", imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg" }, { value: "camel", imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg" }] }, { type: "boolean", name: "question7", labelTrue: "Yes", labelFalse: "No" }, { type: "matrix", name: "question8", columns: ["Column 1", "Column 2", "Column 3"], rows: ["Row 1", "Row 2"] }, { type: "multipletext", name: "question9", items: [{ name: "text1" }, { name: "text2" }] }], title: "Page02", description: "Page02 Description" }] }
+
+  function sendDataToServer(survey) {
+    console.log(survey.data);
+    alert(JSON.stringify(survey.data));
+    //survey.sendResult('31e68899-4e68-474a-9db6-c0635105da25');
+  }
+
+  var survey = new Survey.Model(surveyJSON);
+  $("#surveyContainer").Survey({
+    model: survey,
+    onComplete: sendDataToServer
+  });
+</script>
+
+</html>
