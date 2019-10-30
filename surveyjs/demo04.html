@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Language" content="en">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>wyg@evangtech</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <link href="https://surveyjs.azureedge.net/1.1.17/survey.css" type="text/css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://surveyjs.azureedge.net/1.1.17/survey.jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div id="surveyContainer"></div>
+  </div>
+</body>
+
+<script>
+  var surveySendResult=function(s,options){
+    if(options.success){
+      s.getResult('1416df24-34a2-43df-9459-6788c9957f22','question1');
+    }
+  };
+
+  var surveyGetResult=function(s,options){
+    if(options.success){
+      console.log(options.dataList);
+    }
+  }
+
+  Survey.StylesManager.applyTheme("default");
+
+  var surveyJSON = {
+    surveyId: '9d868075-db73-40c7-9ced-7f4d027edb84',
+    surveyPostId: '31e68899-4e68-474a-9db6-c0635105da25'
+  };
+
+  var survey = new Survey.Model(surveyJSON);
+
+  $("#surveyContainer").Survey({
+    model: survey,
+    onSendResult: surveySendResult,
+    onGetResult: surveyGetResult
+  });
+</script>
+
+</html>
+
